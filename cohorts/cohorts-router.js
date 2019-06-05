@@ -1,8 +1,13 @@
 const router = require('express').Router();
 const Cohorts = require('./cohorts-model.js');
 
+const knex = require('knex'); 
 
-router.get('/', async (req, res) => {
+const knexConfig = require('../knexfile.js');
+
+const db = knex(knexConfig.development);
+
+router.get('/', (req, res) => {
   // get the roles from the database
   Cohorts.find()
     .then(cohorts => {
@@ -22,6 +27,17 @@ router.get('/:id', (req, res) => {
       res.status(500).json(error);
     })
 });
+
+router.get('/:id/students', async (req, res) => {
+  try {
+    const students = await db('students')
+      .select()
+      .where({ cohort_id: req.params.id})
+      res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+})
 
 router.post('/', (req, res) => {
   Cohorts.add(req.body)

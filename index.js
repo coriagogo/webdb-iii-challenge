@@ -5,11 +5,13 @@ const helmet = require('helmet');
 const server = express();
 
 const cohortsRouter = require('./cohorts/cohorts-router.js');
+const studentsRouter = require('./cohorts/students-router.js');
 
 server.use(helmet());
 server.use(express.json());
 
 server.use('/api/cohorts', cohortsRouter);
+server.use('/api/students', studentsRouter);
 
 // list all roles
 // server.get('/api/cohorts', async (req, res) => {
