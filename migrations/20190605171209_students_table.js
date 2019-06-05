@@ -1,11 +1,11 @@
 
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('users', function(tbl){
+  return knex.schema.createTable('students', function(tbl){
     tbl.increments();
 
     tbl
       .string('name', 128)
-      .notNullable()
+      .notNullable();
   
 
     tbl
@@ -14,10 +14,10 @@ exports.up = function(knex, Promise) {
       .references('id')
       .inTable('cohorts')
       .onDelete('CASCADE')
-      .onUpdate('CASCADE')
+      .onUpdate('CASCADE');
   })
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists('cohorts');
+  return knex.schema.dropTableIfExists('students');
 };
