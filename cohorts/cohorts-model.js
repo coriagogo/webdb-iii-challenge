@@ -22,9 +22,9 @@ function findById(id) {
     .first();
 }
 
-function findStudentByCohortId(id) {
-  return db()
-}
+// function findStudentByCohortId(id) {
+//   return db()
+// }
 
 function add(cohort) {
   return db('cohorts')
