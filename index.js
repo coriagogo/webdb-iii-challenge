@@ -1,27 +1,26 @@
 // Manage Roles (id, name)
 const express = require('express');
 const helmet = require('helmet');
-const knex = require('knex');
-
-const knexConfig = require('./knexfile.js');
-
-const db = knex(knexConfig.development);
 
 const server = express();
+
+const cohortsRouter = require('./cohorts/cohorts-router.js');
 
 server.use(helmet());
 server.use(express.json());
 
+server.use('/api/cohorts', cohortsRouter);
+
 // list all roles
-server.get('/api/cohorts', async (req, res) => {
-  // get the roles from the database
-  try {
-    const cohorts = await db('cohorts'); // all the records from the table
-    res.status(200).json(cohorts);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
+// server.get('/api/cohorts', async (req, res) => {
+//   // get the roles from the database
+//   try {
+//     const cohorts = await db('cohorts'); // all the records from the table
+//     res.status(200).json(cohorts);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
 
 // list a role by id
 // server.get('/api/roles/:id', async (req, res) => {
